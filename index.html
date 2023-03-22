@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Add New Product</h3>
+<input type="text" id="prd" placeholder="New Product">
+<button type="button" onclick="addProduct()">ADD</button>
+<br>
+<h3>Display All Product</h3>
+<p id="result"></p>
+<script>
+
+    let arr = [];
+
+    function addProduct() {
+        arr.push(document.getElementById('prd').value);
+        document.getElementById('prd').value = '';
+        displayProduct();
+        getCountProduct();
+    }
+
+    function getCountProduct() {
+        document.getElementById('count').innerHTML = arr.length + ' products';
+    }
+
+    function displayProduct() {
+        let x = '';
+        x += '<table>';
+        for (let i = 0; i < arr.length; i++) {
+            x += '<tr>';
+            x += '<td>' + arr[i]
+                + '<td>' + ` <button onclick="editprd(${i})">Edit</button>`
+                + '<td>' + `<button onclick="deleteprd(${i})">Delete</button> <br>`;
+        }
+        document.getElementById('result').innerHTML = x;
+    }
+
+    function editprd(index) {
+        arr[index] = prompt('');
+        displayProduct();
+    }
+
+    function deleteprd(index) {
+        if (confirm('Do you want delete this product?')) {
+            arr.splice(index, 1);
+            displayProduct();
+        }
+        getCountProduct();
+    }
+
+</script>
+</body>
+</html>
